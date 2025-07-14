@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Love Confession</title>
+  <style>
+    body {
+      background-color: #fff0f5;
+      font-family: 'Comic Sans MS', cursive;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      overflow: hidden;
+    }
+
+    .love-container {
+      text-align: center;
+      position: relative;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    #main-img {
+      width: 220px;
+      margin-bottom: 15px;
+      border-radius: 15px;
+      transition: 0.3s ease-in-out;
+    }
+
+    h2 {
+      color: #d63384;
+      margin: 10px 0;
+      font-size: 24px;
+    }
+
+    button {
+      padding: 10px 25px;
+      font-size: 18px;
+      margin: 10px;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .yes-btn {
+      background-color: #ff4d88;
+      color: white;
+    }
+
+    .no-btn {
+      background-color: #ffc2d1;
+      color: brown;
+      position: absolute;
+    }
+
+    #message {
+      margin-top: 20px;
+      font-size: 20px;
+      color: #d63384;
+      font-weight: bold;
+      display: none;
+    }
+
+    #preload {
+      display: none;
+    }
+
+    .heart {
+      position: absolute;
+      top: -30px;
+      font-size: 24px;
+      animation: fallDown 4s linear forwards;
+      opacity: 1;
+    }
+
+    @keyframes fallDown {
+      0% { transform: translateY(0); opacity: 1; }
+      100% { transform: translateY(110vh); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+  <div class="love-container">
+    <img id="main-img" src="https://i.ibb.co/0p7S1QW/Cutie.jpg" alt="Cute Girl" />
+    <h2>Do you love me?</h2>
+    <button class="yes-btn" onclick="showLove()">Yes 🥰</button>
+    <button class="no-btn" id="noBtn">No 🙈</button>
+    <div id="message">I know this Laila🎀🥰</div>
+
+    <!-- Preload second image -->
+    <img id="preload" src="https://i.ibb.co/DPZcftGh/Cutie-02.jpg" alt="Preload" />
+
+    <!-- Audio with GitHub RAW link -->
+    <audio id="bg-music" src="https://raw.githubusercontent.com/DarkXworker/mylaila-/main/ik_kudi_full_clip.mp3"></audio>
+  </div>
+
+  <script>
+    const noBtn = document.getElementById('noBtn');
+
+    function moveButton() {
+      const btnWidth = noBtn.offsetWidth;
+      const btnHeight = noBtn.offsetHeight;
+      const maxX = window.innerWidth - btnWidth;
+      const maxY = window.innerHeight - btnHeight;
+      const x = Math.random() * maxX;
+      const y = Math.random() * maxY;
+      noBtn.style.left = `${x}px`;
+      noBtn.style.top = `${y}px`;
+    }
+
+    noBtn.addEventListener('mouseenter', moveButton);
+    noBtn.addEventListener('touchstart', moveButton);
+    noBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      moveButton();
+    });
+
+    function showLove() {
+      const img = document.getElementById('main-img');
+      const msg = document.getElementById('message');
+      const music = document.getElementById('bg-music');
+
+      msg.style.display = "block";
+      music.play();
+
+      setTimeout(() => {
+        img.src = "https://i.ibb.co/DPZcftGh/Cutie-02.jpg";
+      }, 2500);
+
+      for (let i = 0; i < 30; i++) {
+        const heart = document.createElement("div");
+        heart.className = "heart";
+        heart.innerText = "💗";
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.fontSize = (Math.random() * 15 + 20) + "px";
+        heart.style.animationDelay = (Math.random() * 0.5).toFixed(2) + "s";
+
+        document.body.appendChild(heart);
+        setTimeout(() => heart.remove(), 5000);
+      }
+    }
+  </script>
+</body>
+</html>
